@@ -8,7 +8,8 @@ import com.projectbasicapi.model.Item;
 import com.sun.istack.NotNull;
 
 public class ItemForm {
-
+ 
+    private Long idUser;
 	@NotNull @NotEmpty @Length(min = 5)
     private String title;
 	@NotNull @NotEmpty @Length(min = 5)
@@ -34,9 +35,16 @@ public class ItemForm {
 		return new Item(getTitle(),getDescription());
 	}
 
-	@Override
-	public String toString() {
-		return "ItemForm [title=" + title + ", description=" + description + "]";
+	public Long getIdUser() {
+		return idUser;
 	}
 
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemForm [idUser=" + idUser + ", title=" + title + ", description=" + description + "]";
+	}
 }

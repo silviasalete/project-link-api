@@ -1,6 +1,7 @@
 package com.projectbasicapi.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -47,6 +48,11 @@ public class ItemController {
 		return itemService.findAll(pagination);
 	}
 
+	@GetMapping("/all/{idUser}")
+	public List<Item> findAllById(@PathVariable Long idUser) {		
+		return itemService.findAllByUSerId(idUser);
+	}
+	
 	@GetMapping("/{id}")
 	public ItemDto findById(@PathVariable Long id) {
 		return itemService.findById(id);
@@ -56,10 +62,8 @@ public class ItemController {
 	@Transactional
 	@CacheEvict(value = "ListItem", allEntries = true)
 	public ResponseEntity<ItemDto> save(@RequestBody @Valid ItemForm itemForm,  UriComponentsBuilder uriBuilder) {
-		System.out.println("itemForm: "+itemForm.toString());
-		User user = new User();
-		user.setId(Long.valueOf(2)); //Mock remover
-		Item item = itemService.save(itemForm, userService.findById(user.getId()));
+		
+		Item item = itemService.save(itemForm, userService.findById(itemForm.getIdUser()));
 		
 		URI uri = uriBuilder.path("/item/{id}").buildAndExpand(item.getId()).toUri();
 		return ResponseEntity.created(uri).body(ItemDto.toDto(item));

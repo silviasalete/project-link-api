@@ -1,6 +1,9 @@
 package com.projectbasicapi.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.projectbasicapi.model.Item;
 import com.projectbasicapi.model.User;
 import com.projectbasicapi.repository.ItemRepository;
+import com.projectbasicapi.repository.UserRepository;
 import com.projectbasicapi.service.ItemService;
 import com.projectbasicapi.web.dto.ItemDto;
 import com.projectbasicapi.web.form.ItemForm;
@@ -19,6 +23,9 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Autowired
 	ItemRepository itemRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	@Override
 	public Page<Item> findAll(Pageable pagination) {
@@ -58,5 +65,11 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void delete(Long id) {
 		itemRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Item> findAllByUSerId(Long idUser) {  
+		User user = userRepository.findById(idUser).get();
+		return itemRepository.findAllByCreatedBy(user);
 	}
 }

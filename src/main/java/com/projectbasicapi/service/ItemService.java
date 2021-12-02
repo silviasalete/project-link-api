@@ -1,5 +1,7 @@
 package com.projectbasicapi.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,4 +17,5 @@ public interface  ItemService {
 	Item save(ItemForm itemForm, User user);
 	ItemDto update(Item item);
 	void delete(Long id);
+	List<Item> findAllByUSerId(Long idUser);
 }
