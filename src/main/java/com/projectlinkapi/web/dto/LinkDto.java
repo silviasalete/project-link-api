@@ -7,19 +7,19 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import com.projectlinkapi.model.Item;
+import com.projectlinkapi.model.Link;
 
-public class ItemDto {
+public class LinkDto {
 
 	private Long id;
     private String title;
     private String description;
 	
-	public ItemDto() {
+	public LinkDto() {
 		super();
 	}
 
-	public ItemDto(Long id, String title, String description) {
+	public LinkDto(Long id, String title, String description) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -50,20 +50,20 @@ public class ItemDto {
 		this.description = description;
 	}
 
-	public static ItemDto toDto(Item item) {
+	public static LinkDto toDto(Link link) {
 		
-		return new ItemDto(item.getId(), item.getTitle(), item.getDescription());
+		return new LinkDto(link.getId(), link.getTitle(), link.getDescription());
 	}
 
-	public static Page<ItemDto> toDtoList(Page<Item> listItem) {
+	public static Page<LinkDto> toDtoList(Page<Link> listLink) {
 		
-		List<ItemDto> listItemDto = new ArrayList<ItemDto>();
+		List<LinkDto> listLinkDto = new ArrayList<LinkDto>();
 		
-		for (Item item : listItem) {
-			listItemDto.add(new ItemDto(item.getId(), item.getTitle(), item.getDescription()));
+		for (Link link : listLink) {
+			listLinkDto.add(new LinkDto(link.getId(), link.getTitle(), link.getDescription()));
 		}
 		
-		return new PageImpl<ItemDto>(listItemDto, listItem.getPageable(), listItem.getTotalElements());
+		return new PageImpl<LinkDto>(listLinkDto, listLink.getPageable(), listLink.getTotalElements());
 	}
     
 }

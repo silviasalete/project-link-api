@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projectlinkapi.model.User;
 import com.projectlinkapi.service.UserService;
-import com.projectlinkapi.web.dto.ItemDto;
+import com.projectlinkapi.web.dto.LinkDto;
 import com.projectlinkapi.web.dto.UserRegistrationDto;
 
 @RestController

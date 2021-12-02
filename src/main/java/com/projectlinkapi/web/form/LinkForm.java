@@ -4,10 +4,10 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.projectlinkapi.model.Item;
+import com.projectlinkapi.model.Link;
 import com.sun.istack.NotNull;
 
-public class ItemForm {
+public class LinkForm {
  
     private Long idUser;
 	@NotNull @NotEmpty @Length(min = 5)
@@ -31,8 +31,8 @@ public class ItemForm {
 		this.description = description;
 	}
 
-	public Item toEntity() {
-		return new Item(getTitle(),getDescription());
+	public Link toEntity() {
+		return new Link(getTitle(),getDescription());
 	}
 
 	public Long getIdUser() {
@@ -45,6 +45,6 @@ public class ItemForm {
 
 	@Override
 	public String toString() {
-		return "ItemForm [idUser=" + idUser + ", title=" + title + ", description=" + description + "]";
+		return "LinkForm [idUser=" + idUser + ", title=" + title + ", description=" + description + "]";
 	}
 }

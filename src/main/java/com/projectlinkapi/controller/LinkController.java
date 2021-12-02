@@ -23,64 +23,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.projectlinkapi.model.Item;
-import com.projectlinkapi.model.User;
-import com.projectlinkapi.service.ItemService;
+import com.projectlinkapi.model.Link;
+import com.projectlinkapi.service.LinkService;
 import com.projectlinkapi.service.UserService;
-import com.projectlinkapi.web.dto.ItemDto;
-import com.projectlinkapi.web.form.ItemForm;
+import com.projectlinkapi.web.dto.LinkDto;
+import com.projectlinkapi.web.form.LinkForm;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/link")
 @CrossOrigin(origins = "*")
-public class ItemController {
+public class LinkController {
 	
 	@Autowired
-	private ItemService itemService;
+	private LinkService linkService;
 	
 	@Autowired
 	private UserService userService;
 
 	@GetMapping
-	@Cacheable(value = "ListItem")
-	public Page<Item> findAll(Pageable pagination) {		
-//		http://localhost:8080/item?page=0&size=3&sort=id,desc&sort=title,asc
-		return itemService.findAll(pagination);
+	@Cacheable(value = "ListLink")
+	public Page<Link> findAll(Pageable pagination) {		
+//		http://localhost:8080/link?page=0&size=3&sort=id,desc&sort=title,asc
+		return linkService.findAll(pagination);
 	}
 
 	@GetMapping("/all/{idUser}")
-	public List<Item> findAllById(@PathVariable Long idUser) {		
-		return itemService.findAllByUSerId(idUser);
+	public List<Link> findAllById(@PathVariable Long idUser) {		
+		return linkService.findAllByUSerId(idUser);
 	}
 	
 	@GetMapping("/{id}")
-	public ItemDto findById(@PathVariable Long id) {
-		return itemService.findById(id);
+	public LinkDto findById(@PathVariable Long id) {
+		return linkService.findById(id);
 	}
 	
 	@PostMapping("/save")
 	@Transactional
-	@CacheEvict(value = "ListItem", allEntries = true)
-	public ResponseEntity<ItemDto> save(@RequestBody @Valid ItemForm itemForm,  UriComponentsBuilder uriBuilder) {
+	@CacheEvict(value = "ListLink", allEntries = true)
+	public ResponseEntity<LinkDto> save(@RequestBody @Valid LinkForm linkForm,  UriComponentsBuilder uriBuilder) {
 		
-		Item item = itemService.save(itemForm, userService.findById(itemForm.getIdUser()));
+		Link link = linkService.save(linkForm, userService.findById(linkForm.getIdUser()));
 		
-		URI uri = uriBuilder.path("/item/{id}").buildAndExpand(item.getId()).toUri();
-		return ResponseEntity.created(uri).body(ItemDto.toDto(item));
+		URI uri = uriBuilder.path("/link/{id}").buildAndExpand(link.getId()).toUri();
+		return ResponseEntity.created(uri).body(LinkDto.toDto(link));
 	}
 	
 	@PutMapping("/update")
 	@Transactional
-	@CacheEvict(value = "ListItem", allEntries = true)
-	public ResponseEntity<ItemDto> update(@RequestBody @Valid Item item) {
-		return ResponseEntity.ok(itemService.update(item)) ;
+	@CacheEvict(value = "ListLink", allEntries = true)
+	public ResponseEntity<LinkDto> update(@RequestBody @Valid Link link) {
+		return ResponseEntity.ok(linkService.update(link)) ;
 	}
 	 
 	@DeleteMapping("/{id}")
 	@Transactional
-	@CacheEvict(value = "ListItem", allEntries = true)
+	@CacheEvict(value = "ListLink", allEntries = true)
 	public ResponseEntity<?> delet(@PathVariable Long id) {
-		itemService.delete(id);
+		linkService.delete(id);
 		return ResponseEntity.ok().build();
 	}	
 	

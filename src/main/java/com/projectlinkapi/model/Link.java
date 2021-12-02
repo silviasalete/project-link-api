@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Item {
+public class Link {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,16 +31,16 @@ public class Item {
     private User    updatedBy;
     private Date    updatedIn;
 
-	public Item() {
+	public Link() {
 		super();
 	}
 
-	public Item(String title, String description) {
+	public Link(String title, String description) {
 		this.title = title;
 		this.description = description;
 	}
 
-	public Item(Long id, String title, String description, User createdBy, Date createdIn, User updatedBy,
+	public Link(Long id, String title, String description, User createdBy, Date createdIn, User updatedBy,
 			Date updatedIn) {
 		super();
 		this.id = id;
