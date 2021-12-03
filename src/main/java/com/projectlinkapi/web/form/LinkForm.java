@@ -13,7 +13,7 @@ public class LinkForm {
 	@NotNull @NotEmpty @Length(min = 5)
     private String title;
 	@NotNull @NotEmpty @Length(min = 5)
-    private String description;
+    private String url;
 
 	public String getTitle() {
 		return title;
@@ -23,16 +23,16 @@ public class LinkForm {
 		this.title = title;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public Link toEntity() {
-		return new Link(getTitle(),getDescription());
+		return new Link(getTitle(),getUrl());
 	}
 
 	public Long getIdUser() {
@@ -45,6 +45,6 @@ public class LinkForm {
 
 	@Override
 	public String toString() {
-		return "LinkForm [idUser=" + idUser + ", title=" + title + ", description=" + description + "]";
+		return "LinkForm [idUser=" + idUser + ", title=" + title + ", url=" + url + "]";
 	}
 }

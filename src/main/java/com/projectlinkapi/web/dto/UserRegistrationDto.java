@@ -1,5 +1,6 @@
 package com.projectlinkapi.web.dto;
 
+import java.util.Collection;
 import java.util.Collections;
 
 import com.projectlinkapi.model.Role;
@@ -10,18 +11,21 @@ public class UserRegistrationDto {
     private String name;
     private String email;
     private String password;
+    private String dominio;
 
     public UserRegistrationDto() {
 
     }
 
-    public UserRegistrationDto(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+    public UserRegistrationDto(String name, String email, String password, String dominio) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.dominio = dominio;
+	}
 
-    public String getName() {
+	public String getName() {
         return name;
     }
 
@@ -46,12 +50,21 @@ public class UserRegistrationDto {
     }
 
 	public User toEntity(UserRegistrationDto userRegistrationDto) {
-		return new User(userRegistrationDto.getName(),userRegistrationDto.getEmail(),userRegistrationDto.getPassword(),Collections.singletonList(new Role("ROLE_USER")));
+		return new User(userRegistrationDto.getName(),userRegistrationDto.getEmail(),userRegistrationDto.getPassword(), userRegistrationDto.getDominio(), Collections.singletonList(new Role("ROLE_USER")));
+	}
+
+	public String getDominio() {
+		return dominio;
+	}
+
+	public void setDominio(String dominio) {
+		this.dominio = dominio;
 	}
 
 	@Override
 	public String toString() {
-		return "UserRegistrationDto [name=" + name + ", email=" + email + ", password=" + password + "]";
+		return "UserRegistrationDto [name=" + name + ", email=" + email + ", password=" + password + ", dominio="
+				+ dominio + "]";
 	}
 	
 }

@@ -20,8 +20,8 @@ public class Link {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "url")
+    private String url;
     
     @ManyToOne
     private User    createdBy;
@@ -35,17 +35,17 @@ public class Link {
 		super();
 	}
 
-	public Link(String title, String description) {
+	public Link(String title, String url) {
 		this.title = title;
-		this.description = description;
+		this.url = url;
 	}
 
-	public Link(Long id, String title, String description, User createdBy, Date createdIn, User updatedBy,
+	public Link(Long id, String title, String url, User createdBy, Date createdIn, User updatedBy,
 			Date updatedIn) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.description = description;
+		this.url = url;
 		this.createdBy = createdBy;
 		this.createdIn = createdIn;
 		this.updatedBy = updatedBy;
@@ -68,12 +68,12 @@ public class Link {
 		this.title = title;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public User getCreatedBy() {

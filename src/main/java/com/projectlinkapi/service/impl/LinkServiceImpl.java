@@ -57,7 +57,7 @@ public class LinkServiceImpl implements LinkService {
 		
 		Link linkFound = linkRepository.findById(link.getId()).get();
 		linkFound.setTitle(link.getTitle());
-		linkFound.setDescription(link.getDescription());
+		linkFound.setUrl(link.getUrl());
 		LinkDto linkDto = new LinkDto();
 		return linkDto.toDto(linkFound);
 	}
