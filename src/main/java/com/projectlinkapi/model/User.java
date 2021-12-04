@@ -1,6 +1,7 @@
 package com.projectlinkapi.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +19,10 @@ public class User implements UserDetails {
     private String name;
     private String email;
     private String password;
-    private String dominio;
+
+    @NotNull
+    @Column(unique=true)
+    private String domain;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name               = "users_roles",
@@ -26,12 +30,12 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
-    public User(String name, String email, String password, String dominio, Collection<Role> roles) {
+    public User(String name, String email, String password, String domain, Collection<Role> roles) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.dominio = dominio;
+		this.domain = domain;
 		this.roles = roles;
 	}
 
@@ -70,12 +74,12 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getDominio() {
-		return dominio;
+    public String getDomain() {
+		return domain;
 	}
 
-	public void setDominio(String dominio) {
-		this.dominio = dominio;
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 
     public Collection<Role> getRoles() {
@@ -118,8 +122,8 @@ public class User implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", dominio="
-				+ dominio + ", roles=" + roles + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", domain="
+				+ domain + ", roles=" + roles + "]";
 	}
 	
 }

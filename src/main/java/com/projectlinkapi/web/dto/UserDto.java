@@ -10,17 +10,19 @@ public class UserDto {
     private String name;
     private String email;
     private String password;
+    private String domain;
     private Collection<Role> roles;
     
 	public UserDto() {
 		super();
 	}
 	
-	public UserDto(String name, String email, String password, Collection<Role> roles) {
+	public UserDto(String name, String email, String password,String domain, Collection<Role> roles) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.domain = domain;
 		this.roles = roles;
 	}
 	
@@ -49,8 +51,17 @@ public class UserDto {
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
+	
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+
 	public User toEntity(UserDto userDto) {
-		return new User(userDto.getName(),userDto.getEmail(),userDto.getPassword(),userDto.getRoles());
+		return new User(userDto.getName(),userDto.getEmail(),userDto.getPassword(), userDto.getDomain(),userDto.getRoles());
 	}
     
     

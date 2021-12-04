@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.projectlinkapi.model.User;
 import com.projectlinkapi.repository.UserRepository;
 import com.projectlinkapi.service.UserService;
+import com.projectlinkapi.utils.ReplaceSpecialCharacters;
 import com.projectlinkapi.web.dto.UserRegistrationDto;
 
 @Service
@@ -17,8 +18,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User save(UserRegistrationDto userRegistrationDto) {
+		
 		String passwordCrypt = new BCryptPasswordEncoder().encode(userRegistrationDto.getPassword());
 		userRegistrationDto.setPassword(passwordCrypt);
+		
+
+		ReplaceSpecialCharacters replaceDomain = new ReplaceSpecialCharacters();
+		userRegistrationDto.setDomain(replaceDomain.replaceAll(userRegistrationDto.getDomain()));
+		
 		return userRepository.save(userRegistrationDto.toEntity(userRegistrationDto));
 	}
 

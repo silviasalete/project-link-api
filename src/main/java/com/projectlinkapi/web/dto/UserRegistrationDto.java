@@ -11,18 +11,18 @@ public class UserRegistrationDto {
     private String name;
     private String email;
     private String password;
-    private String dominio;
+    private String domain;
 
     public UserRegistrationDto() {
 
     }
 
-    public UserRegistrationDto(String name, String email, String password, String dominio) {
+    public UserRegistrationDto(String name, String email, String password, String domain) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.dominio = dominio;
+		this.domain = domain;
 	}
 
 	public String getName() {
@@ -50,21 +50,21 @@ public class UserRegistrationDto {
     }
 
 	public User toEntity(UserRegistrationDto userRegistrationDto) {
-		return new User(userRegistrationDto.getName(),userRegistrationDto.getEmail(),userRegistrationDto.getPassword(), userRegistrationDto.getDominio(), Collections.singletonList(new Role("ROLE_USER")));
+		return new User(userRegistrationDto.getName(),userRegistrationDto.getEmail(),userRegistrationDto.getPassword(), userRegistrationDto.getDomain(), Collections.singletonList(new Role("ROLE_USER")));
 	}
 
-	public String getDominio() {
-		return dominio;
+	public String getDomain() {
+		return domain;
 	}
 
-	public void setDominio(String dominio) {
-		this.dominio = dominio;
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 
 	@Override
 	public String toString() {
-		return "UserRegistrationDto [name=" + name + ", email=" + email + ", password=" + password + ", dominio="
-				+ dominio + "]";
+		return "UserRegistrationDto [name=" + name + ", email=" + email + ", password=" + password + ", domain="
+				+ domain + "]";
 	}
 	
 }
