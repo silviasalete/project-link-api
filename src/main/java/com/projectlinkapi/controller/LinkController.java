@@ -47,9 +47,14 @@ public class LinkController {
 		return linkService.findAll(pagination);
 	}
 
-	@GetMapping("/all/{idUser}")
-	public List<Link> findAllById(@PathVariable Long idUser) {		
+	@GetMapping("/allByUserId/{idUser}")
+	public List<Link> findAllByUserId(@PathVariable Long idUser) {		
 		return linkService.findAllByUSerId(idUser);
+	}
+
+	@GetMapping("/allByDomain/{domain}")
+	public List<Link> findAllByDomain(@PathVariable String domain) {		
+		return linkService.findAllByDomain(domain);
 	}
 	
 	@GetMapping("/{id}")

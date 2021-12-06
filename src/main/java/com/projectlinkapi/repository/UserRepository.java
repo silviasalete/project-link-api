@@ -11,4 +11,5 @@ import com.projectlinkapi.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email );
+	Optional<User> findByDomain(String domain);
 }

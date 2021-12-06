@@ -18,4 +18,5 @@ public interface  LinkService {
 	LinkDto update(Link link);
 	void delete(Long id);
 	List<Link> findAllByUSerId(Long idUser);
+	List<Link> findAllByDomain(String domain);
 }

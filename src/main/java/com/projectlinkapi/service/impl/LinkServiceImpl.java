@@ -72,4 +72,10 @@ public class LinkServiceImpl implements LinkService {
 		User user = userRepository.findById(idUser).get();
 		return linkRepository.findAllByCreatedBy(user);
 	}
+
+	@Override
+	public List<Link> findAllByDomain(String domain) {
+		User user = userRepository.findByDomain(domain).get();
+		return linkRepository.findAllByCreatedBy(user);
+	}
 }
