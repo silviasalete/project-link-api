@@ -1,6 +1,8 @@
 package com.projectlinkapi.controller;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +27,12 @@ public class UserController {
 	
 	@PostMapping("/save")
 	public User save(@RequestBody UserRegistrationDto userRegistrationDto) {
-		return userService.save(userRegistrationDto);
+		Optional<User> userDomain = userService.haveDomain(userRegistrationDto.getDomain());
+		if (userDomain.isPresent()) {
+			return null;
+		}else {
+			return userService.save(userRegistrationDto);
+		}
 	}
 	
 	@GetMapping("/{id}")

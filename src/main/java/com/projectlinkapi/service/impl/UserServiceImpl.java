@@ -1,5 +1,8 @@
 package com.projectlinkapi.service.impl;
 
+import java.util.Optional;
+import java.util.function.Supplier;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,9 +25,8 @@ public class UserServiceImpl implements UserService {
 		String passwordCrypt = new BCryptPasswordEncoder().encode(userRegistrationDto.getPassword());
 		userRegistrationDto.setPassword(passwordCrypt);
 		
-
-		ReplaceSpecialCharacters replaceDomain = new ReplaceSpecialCharacters();
-		userRegistrationDto.setDomain(replaceDomain.replaceAll(userRegistrationDto.getDomain()));
+		ReplaceSpecialCharacters domainFormated = new ReplaceSpecialCharacters();
+		userRegistrationDto.setDomain(domainFormated.replaceAll(userRegistrationDto.getDomain()));
 		
 		return userRepository.save(userRegistrationDto.toEntity(userRegistrationDto));
 	}
@@ -32,6 +34,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findById(Long id) {
 		return userRepository.findById(id).get();
+	}
+
+	@Override
+	public Optional<User> haveDomain(String domain) {	
+		return userRepository.findByDomain(domain);
 	}
 	
 }
